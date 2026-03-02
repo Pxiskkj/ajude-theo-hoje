@@ -4,32 +4,6 @@
 <head>
 	<meta charset="utf-8">
 	<!-- Meta Pixel Code -->
-	<script>
-		!function (f, b, e, v, n, t, s) {
-			if (f.fbq) return; n = f.fbq = function () {
-				n.callMethod ?
-				n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-			};
-			if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
-			n.queue = []; t = b.createElement(e); t.async = !0;
-			t.src = v; s = b.getElementsByTagName(e)[0];
-			s.parentNode.insertBefore(t, s)
-		}(window, document, 'script',
-			'https://connect.facebook.net/en_US/fbevents.js');
-		fbq('init', '1398312264887357');
-		fbq('track', 'PageView');
-	</script>
-	<noscript><img height="1" width="1" style="display:none"
-			src="https://www.facebook.com/tr?id=1398312264887357&ev=PageView&noscript=1" /></noscript>
-	<!-- End Meta Pixel Code -->
-	<script>
-		window.pixelId = "699640da433c460509cb5a5e";
-		var a = document.createElement("script");
-		a.setAttribute("async", "");
-		a.setAttribute("defer", "");
-		a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
-		document.head.appendChild(a);
-	</script>
 </head>
 
 <body
@@ -539,32 +513,50 @@
 	<script src="js/latest.js" data-utmify-prevent-subids="" data-utmify-ignore-iframe="" async="" defer=""></script>
 
 	<script>
-		window.criarPagamento = async function (valor) {
-			try {
-				const response = await fetch("/criar-pagamento", {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json"
-					},
-					body: JSON.stringify({ valor })
-				});
+async function criarPagamento(valor) {
+  try {
+    const response = await fetch("http://localhost:3001/criar-pagamento", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ valor }),
+    });
 
-				const data = await response.json();
-				console.log("RETORNO:", data);
+    const data = await response.json();
 
-				if (data.data && data.data.checkout_url) {
-					window.location.href = data.data.checkout_url;
-				} else {
-					alert("Erro ao gerar pagamento");
-				}
+    console.log("RESPOSTA COMPLETA:", data);
 
-			} catch (error) {
-				console.error(error);
-				alert("Erro na conexão com servidor");
-			}
-		};
-	</script>
+    if (data.pix) {
+      mostrarPixNaTela(data.pix);
+    } else if (data.data && data.data.pix) {
+      mostrarPixNaTela(data.data.pix);
+    } else {
+      alert("Erro ao gerar PIX");
+    }
 
+  } catch (error) {
+    console.error("Erro:", error);
+  }
+}
+
+function mostrarPixNaTela(pix) {
+  document.body.innerHTML = `
+    <div style="text-align:center; padding:40px; font-family:sans-serif;">
+      <h2>Pagamento via PIX</h2>
+
+      <img src="data:image/png;base64,${pix.qr_code_base64}" 
+           style="width:250px; margin:20px 0;" />
+
+      <p><strong>PIX Copia e Cola:</strong></p>
+      <textarea style="width:80%; height:100px;">${pix.copy_paste}</textarea>
+
+      <br><br>
+      <button onclick="location.reload()">Voltar</button>
+    </div>
+  `;
+}
+</script>
 
 
 
@@ -976,7 +968,7 @@
 							data-id="82b287b" data-element_type="widget" data-widget_type="button.default">
 							<div class="elementor-widget-container">
 								<div class="elementor-button-wrapper">
-									<a class="elementor-button elementor-button-link elementor-size-sm" href="#">
+									<a class="elementor-button elementor-button-link elementor-size-sm" href="javascript:void(0)">
 										<span class="elementor-button-content-wrapper">
 											<span class="elementor-button-icon">
 												<svg aria-hidden="true" class="e-font-icon-svg e-fas-angle-down"
@@ -995,7 +987,7 @@
 							data-id="baa597a" data-element_type="widget" data-widget_type="button.default">
 							<div class="elementor-widget-container">
 								<div class="elementor-button-wrapper">
-									<a class="elementor-button elementor-button-link elementor-size-sm" href="#">
+									<a class="elementor-button elementor-button-link elementor-size-sm" href="javascript:void(0)">
 										<span class="elementor-button-content-wrapper">
 											<span class="elementor-button-icon">
 												<svg aria-hidden="true" class="e-font-icon-svg e-fas-angle-down"
@@ -1014,7 +1006,7 @@
 							data-id="989e7b0" data-element_type="widget" data-widget_type="button.default">
 							<div class="elementor-widget-container">
 								<div class="elementor-button-wrapper">
-									<a class="elementor-button elementor-button-link elementor-size-sm" href="#">
+									<a class="elementor-button elementor-button-link elementor-size-sm" href="javascript:void(0)">
 										<span class="elementor-button-content-wrapper">
 											<span class="elementor-button-icon">
 												<svg aria-hidden="true" class="e-font-icon-svg e-fas-angle-down"
@@ -1033,7 +1025,7 @@
 							data-id="bab6078" data-element_type="widget" data-widget_type="button.default">
 							<div class="elementor-widget-container">
 								<div class="elementor-button-wrapper">
-									<a class="elementor-button elementor-button-link elementor-size-sm" href="#">
+									<a class="elementor-button elementor-button-link elementor-size-sm" href="javascript:void(0)">
 										<span class="elementor-button-content-wrapper">
 											<span class="elementor-button-icon">
 												<svg aria-hidden="true" class="e-font-icon-svg e-fas-search"
@@ -1052,7 +1044,7 @@
 							data-id="21563e5" data-element_type="widget" data-widget_type="button.default">
 							<div class="elementor-widget-container">
 								<div class="elementor-button-wrapper">
-									<a class="elementor-button elementor-button-link elementor-size-sm" href="#">
+									<a class="elementor-button elementor-button-link elementor-size-sm" href="javascript:void(0)">
 										<span class="elementor-button-content-wrapper">
 											<span class="elementor-button-icon">
 												<svg aria-hidden="true" class="e-font-icon-svg e-fas-angle-down"
@@ -1087,8 +1079,7 @@
 			data-element_type="container">
 			<div class="e-con-inner">
 				<div class="elementor-element elementor-element-196df7b e-con-full e-flex e-con e-child"
-					data-id="196df7b" data-element_type="container" data-settings="{"
-					background_background":"classic"}"="">
+					data-id="196df7b" data-element_type="container" data-settings='{"background_background":"classic"}'>
 					<div class="elementor-element elementor-element-ec0eaa1 e-con-full e-flex e-con e-child"
 						data-id="ec0eaa1" data-element_type="container">
 						<div class="elementor-element elementor-element-5d8be35 elementor-widget-mobile__width-initial elementor-widget elementor-widget-image"
@@ -1159,7 +1150,7 @@
 								data-id="fb61338" data-element_type="widget" data-widget_type="button.default">
 								<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
-										<a class="elementor-button elementor-button-link elementor-size-sm" href="#"
+										<a class="elementor-button elementor-button-link elementor-size-sm" href="javascript:void(0)"
 											onclick="criarPagamento(30)">
 											<span class="elementor-button-content-wrapper">
 												<span class="elementor-button-text">R$ 30</span>
@@ -1172,8 +1163,8 @@
 								data-id="7fb8941" data-element_type="widget" data-widget_type="button.default">
 								<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
-										<a class="elementor-button elementor-button-link elementor-size-sm" href="#"
-											onclick="criarPagamento(30)">
+										<a class="elementor-button elementor-button-link elementor-size-sm" href="javascript:void(0)"
+											onclick="criarPagamento(40)">
 											<span class="elementor-button-content-wrapper">
 												<span class="elementor-button-text">R$ 40</span>
 											</span>
@@ -1188,8 +1179,8 @@
 								data-id="449c0ab" data-element_type="widget" data-widget_type="button.default">
 								<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
-										<a class="elementor-button elementor-button-link elementor-size-sm" href="#"
-											onclick="criarPagamento(30)">
+										<a class="elementor-button elementor-button-link elementor-size-sm" href="javascript:void(0)"
+											onclick="criarPagamento(50)">
 											<span class="elementor-button-content-wrapper">
 												<span class="elementor-button-text">R$ 50</span>
 											</span>
@@ -1201,8 +1192,8 @@
 								data-id="0fa04d5" data-element_type="widget" data-widget_type="button.default">
 								<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
-										<a class="elementor-button elementor-button-link elementor-size-sm" href="#"
-											onclick="criarPagamento(30)">
+										<a class="elementor-button elementor-button-link elementor-size-sm" href="javascript:void(0)"
+											onclick="criarPagamento(70)">
 											<span class="elementor-button-content-wrapper">
 												<span class="elementor-button-text">R$ 70</span>
 											</span>
@@ -1217,8 +1208,8 @@
 								data-id="a28df6a" data-element_type="widget" data-widget_type="button.default">
 								<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
-										<a class="elementor-button elementor-button-link elementor-size-sm" href="#"
-											onclick="criarPagamento(30)">
+										<a class="elementor-button elementor-button-link elementor-size-sm" href="javascript:void(0)"
+											onclick="criarPagamento(100)">
 											<span class="elementor-button-content-wrapper">
 												<span class="elementor-button-text">R$ 100</span>
 											</span>
@@ -1230,8 +1221,8 @@
 								data-id="6c53b18" data-element_type="widget" data-widget_type="button.default">
 								<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
-										<a class="elementor-button elementor-button-link elementor-size-sm" href="#"
-											onclick="criarPagamento(30)">
+										<a class="elementor-button elementor-button-link elementor-size-sm" href="javascript:void(0)"
+											onclick="criarPagamento(150)">
 											<span class="elementor-button-content-wrapper">
 												<span class="elementor-button-text">R$ 150</span>
 											</span>
@@ -1246,8 +1237,8 @@
 								data-id="c586dfc" data-element_type="widget" data-widget_type="button.default">
 								<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
-										<a class="elementor-button elementor-button-link elementor-size-sm" href="#"
-											onclick="criarPagamento(30)">
+										<a class="elementor-button elementor-button-link elementor-size-sm" href="javascript:void(0)"
+											onclick="criarPagamento(200)">
 											<span class="elementor-button-content-wrapper">
 												<span class="elementor-button-text">R$ 200</span>
 											</span>
@@ -1259,8 +1250,8 @@
 								data-id="d83c60d" data-element_type="widget" data-widget_type="button.default">
 								<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
-										<a class="elementor-button elementor-button-link elementor-size-sm" href="#"
-											onclick="criarPagamento(30)">
+										<a class="elementor-button elementor-button-link elementor-size-sm" href="javascript:void(0)"
+											onclick="criarPagamento(300)">
 											<span class="elementor-button-content-wrapper">
 												<span class="elementor-button-text">R$ 300</span>
 											</span>
@@ -1275,8 +1266,8 @@
 								data-id="ccea0fd" data-element_type="widget" data-widget_type="button.default">
 								<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
-										<a class="elementor-button elementor-button-link elementor-size-sm" href="#"
-											onclick="criarPagamento(30)">
+										<a class="elementor-button elementor-button-link elementor-size-sm" href="javascript:void(0)"
+											onclick="criarPagamento(500)">
 											<span class="elementor-button-content-wrapper">
 												<span class="elementor-button-text">R$ 500</span>
 											</span>
@@ -1288,8 +1279,8 @@
 								data-id="e8872ef" data-element_type="widget" data-widget_type="button.default">
 								<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
-										<a class="elementor-button elementor-button-link elementor-size-sm" href="#"
-											onclick="criarPagamento(30)">
+										<a class="elementor-button elementor-button-link elementor-size-sm" href="javascript:void(0)"
+											onclick="criarPagamento(750)">
 											<span class="elementor-button-content-wrapper">
 												<span class="elementor-button-text">R$ 750</span>
 											</span>
@@ -1304,8 +1295,8 @@
 								data-id="408279a" data-element_type="widget" data-widget_type="button.default">
 								<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
-										<a class="elementor-button elementor-button-link elementor-size-sm" href="#"
-											onclick="criarPagamento(30)">
+										<a class="elementor-button elementor-button-link elementor-size-sm" href="javascript:void(0)"
+											onclick="criarPagamento(1000)">
 											<span class="elementor-button-content-wrapper">
 												<span class="elementor-button-text">R$ 1.000</span>
 											</span>
@@ -1317,8 +1308,7 @@
 					</div>
 				</div>
 				<div class="elementor-element elementor-element-5b7f530 e-con-full e-flex e-con e-child"
-					data-id="5b7f530" data-element_type="container" data-settings="{"
-					background_background":"classic"}"="">
+					data-id="5b7f530" data-element_type="container" data-settings='{"background_background":"classic"}'>
 					<div class="elementor-element elementor-element-f33647a e-con-full e-flex e-con e-child campaign-progress-block"
 						data-id="f33647a" data-element_type="container">
 						<div class="campaign-progress-bar-wrapper" role="progressbar" aria-valuenow="6.18"
@@ -1815,22 +1805,22 @@
 					<div class="vakinha-footer-col">
 						<h6 class="vakinha-footer-title">Links rápidos</h6>
 						<div class="vakinha-footer-links">
-							<a href="#">Quem somos</a><a href="#">Vaquinhas</a><a href="#">Criar vaquinhas</a><a
-								href="#">Login</a><a href="#">Vaquinhas mais amadas</a><a href="#">Política de
-								privacidade</a><a href="#">Termos de uso</a><a href="#">Verificação de links</a>
+							<a href="javascript:void(0)">Quem somos</a><a href="javascript:void(0)">Vaquinhas</a><a href="javascript:void(0)">Criar vaquinhas</a><a
+								href="javascript:void(0)">Login</a><a href="javascript:void(0)">Vaquinhas mais amadas</a><a href="javascript:void(0)">Política de
+								privacidade</a><a href="javascript:void(0)">Termos de uso</a><a href="javascript:void(0)">Verificação de links</a>
 						</div>
 					</div>
 					<div class="vakinha-footer-col">
 						<h6 class="vakinha-footer-title">Dúvidas frequentes</h6>
 						<div class="vakinha-footer-links">
-							<a href="#">Taxas e prazos</a><a href="#">Loja de corações</a><a href="#">Vakinha
-								Premiada</a><a href="#">Blog do Vakinha</a><a href="#">Mapa de posts do blog</a><a
-								href="#">Segurança e transparência</a><a href="#">Busca por recibo</a>
+							<a href="javascript:void(0)">Taxas e prazos</a><a href="javascript:void(0)">Loja de corações</a><a href="javascript:void(0)">Vakinha
+								Premiada</a><a href="javascript:void(0)">Blog do Vakinha</a><a href="javascript:void(0)">Mapa de posts do blog</a><a
+								href="javascript:void(0)">Segurança e transparência</a><a href="javascript:void(0)">Busca por recibo</a>
 						</div>
 					</div>
 					<div class="vakinha-footer-col">
 						<h6 class="vakinha-footer-title">Fale conosco</h6>
-						<a href="#" class="vakinha-footer-contact-link">Clique aqui para falar conosco</a>
+						<a href="javascript:void(0)" class="vakinha-footer-contact-link">Clique aqui para falar conosco</a>
 						<div class="vakinha-footer-hours">De Segunda à Sexta<br>Das 9:30 às 17:00</div>
 						<img src="images/SELO.png" alt="Selo de Segurança" class="vakinha-footer-selo" width="115"
 							height="40" onerror="this.style.display='none'">
