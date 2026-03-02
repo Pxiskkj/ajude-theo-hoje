@@ -88,6 +88,29 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16
 <script src="js/latest.js" data-utmify-prevent-subids="" data-utmify-ignore-iframe="" async="" defer=""></script>
 
 <script>
+	async function criarPagamento(valor) {
+  try {
+    const response = await fetch("/criar-pagamento", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ valor })
+    });
+
+    const data = await response.json();
+
+    if (data.checkout_url) {
+      window.location.href = data.checkout_url;
+    } else {
+      alert("Erro ao gerar pagamento");
+    }
+
+  } catch (error) {
+    console.error(error);
+    alert("Erro na conexão com servidor");
+  }
+}
   window.pixelId = "699640da433c460509cb5a5e";
   var a = document.createElement("script");
   a.setAttribute("async", "");
@@ -398,7 +421,8 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16
 				<div class="elementor-element elementor-element-fb61338 elementor-mobile-align-justify elementor-widget-mobile__width-initial elementor-align-justify elementor-widget__width-initial elementor-widget elementor-widget-button" data-id="fb61338" data-element_type="widget" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
-					<a class="elementor-button elementor-button-link elementor-size-sm" href="https://www.pagamentos-seguro.link/checkout/dc6da328-4726-4211-b0f2-d7a3d271de96"onclick="fbq('track', 'InitiateCheckout')">
+					<a class="elementor-button elementor-button-link elementor-size-sm"href="#"
+onclick="criarPagamento(30)">
 						<span class="elementor-button-content-wrapper">
 									<span class="elementor-button-text">R$ 30</span>
 					</span>
@@ -409,7 +433,8 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16
 				<div class="elementor-element elementor-element-7fb8941 elementor-mobile-align-justify elementor-widget-mobile__width-initial elementor-align-justify elementor-widget__width-initial elementor-widget elementor-widget-button" data-id="7fb8941" data-element_type="widget" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
-					<a class="elementor-button elementor-button-link elementor-size-sm" href="https://www.pagamentos-seguro.link/checkout/cdf15d9b-4506-41a7-a200-3f6e36fee42b"onclick="fbq('track', 'InitiateCheckout')">
+					<a class="elementor-button elementor-button-link elementor-size-sm" href="#"
+onclick="criarPagamento(30)">
 						<span class="elementor-button-content-wrapper">
 									<span class="elementor-button-text">R$ 40</span>
 					</span>
@@ -422,7 +447,8 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16
 				<div class="elementor-element elementor-element-449c0ab elementor-mobile-align-justify elementor-widget-mobile__width-initial elementor-align-justify elementor-widget__width-initial elementor-widget elementor-widget-button" data-id="449c0ab" data-element_type="widget" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
-					<a class="elementor-button elementor-button-link elementor-size-sm" href="https://www.pagamentos-seguro.link/checkout/a48632f0-79c9-473d-8b02-70a633132b53"onclick="fbq('track', 'InitiateCheckout')">
+					<a class="elementor-button elementor-button-link elementor-size-sm" href="#"
+onclick="criarPagamento(30)">
 						<span class="elementor-button-content-wrapper">
 									<span class="elementor-button-text">R$ 50</span>
 					</span>
@@ -433,7 +459,8 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16
 				<div class="elementor-element elementor-element-0fa04d5 elementor-mobile-align-justify elementor-widget-mobile__width-initial elementor-align-justify elementor-widget__width-initial elementor-widget elementor-widget-button" data-id="0fa04d5" data-element_type="widget" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
-					<a class="elementor-button elementor-button-link elementor-size-sm" href="https://www.pagamentos-seguro.link/checkout/4b490f89-cea4-4b87-9440-f3f8fe72559d"onclick="fbq('track', 'InitiateCheckout')">
+					<a class="elementor-button elementor-button-link elementor-size-sm" href="#"
+onclick="criarPagamento(30)">
 						<span class="elementor-button-content-wrapper">
 									<span class="elementor-button-text">R$ 70</span>
 					</span>
@@ -446,7 +473,8 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16
 				<div class="elementor-element elementor-element-a28df6a elementor-mobile-align-justify elementor-widget-mobile__width-initial elementor-align-justify elementor-widget__width-initial elementor-widget elementor-widget-button" data-id="a28df6a" data-element_type="widget" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
-					<a class="elementor-button elementor-button-link elementor-size-sm" href="https://www.pagamentos-seguro.link/checkout/1c8afd77-e5f7-4d67-aef0-8b18b09c5deb"onclick="fbq('track', 'InitiateCheckout')">
+					<a class="elementor-button elementor-button-link elementor-size-sm" href="#"
+onclick="criarPagamento(30)">
 						<span class="elementor-button-content-wrapper">
 									<span class="elementor-button-text">R$ 100</span>
 					</span>
@@ -457,7 +485,8 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16
 				<div class="elementor-element elementor-element-6c53b18 elementor-mobile-align-justify elementor-widget-mobile__width-initial elementor-align-justify elementor-widget__width-initial elementor-widget elementor-widget-button" data-id="6c53b18" data-element_type="widget" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
-					<a class="elementor-button elementor-button-link elementor-size-sm" href="https://www.pagamentos-seguro.link/checkout/66d3f5aa-d960-4c4a-8bce-a9b328ebaf17"onclick="fbq('track', 'InitiateCheckout')">
+					<a class="elementor-button elementor-button-link elementor-size-sm"href="#"
+onclick="criarPagamento(30)">
 						<span class="elementor-button-content-wrapper">
 									<span class="elementor-button-text">R$ 150</span>
 					</span>
@@ -470,7 +499,8 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16
 				<div class="elementor-element elementor-element-c586dfc elementor-mobile-align-justify elementor-widget-mobile__width-initial elementor-align-justify elementor-widget__width-initial elementor-widget elementor-widget-button" data-id="c586dfc" data-element_type="widget" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
-					<a class="elementor-button elementor-button-link elementor-size-sm" href="https://www.pagamentos-seguro.link/checkout/ec411ef4-4ad7-4a8c-bc90-df44273c7222"onclick="fbq('track', 'InitiateCheckout')">
+					<a class="elementor-button elementor-button-link elementor-size-sm"href="#"
+onclick="criarPagamento(30)">
 						<span class="elementor-button-content-wrapper">
 									<span class="elementor-button-text">R$ 200</span>
 					</span>
@@ -481,7 +511,8 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16
 				<div class="elementor-element elementor-element-d83c60d elementor-mobile-align-justify elementor-widget-mobile__width-initial elementor-align-justify elementor-widget__width-initial elementor-widget elementor-widget-button" data-id="d83c60d" data-element_type="widget" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
-					<a class="elementor-button elementor-button-link elementor-size-sm" href="https://www.pagamentos-seguro.link/checkout/0cbf7c5d-d00f-4460-83aa-dec07839c0d6"onclick="fbq('track', 'InitiateCheckout')">
+					<a class="elementor-button elementor-button-link elementor-size-sm"href="#"
+onclick="criarPagamento(30)">
 						<span class="elementor-button-content-wrapper">
 									<span class="elementor-button-text">R$ 300</span>
 					</span>
@@ -494,7 +525,8 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16
 				<div class="elementor-element elementor-element-ccea0fd elementor-mobile-align-justify elementor-widget-mobile__width-initial elementor-align-justify elementor-widget__width-initial elementor-widget elementor-widget-button" data-id="ccea0fd" data-element_type="widget" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
-					<a class="elementor-button elementor-button-link elementor-size-sm" href="https://www.pagamentos-seguro.link/checkout/26831120-4ce3-425e-ad00-3d435a15bb5f"onclick="fbq('track', 'InitiateCheckout')">
+					<a class="elementor-button elementor-button-link elementor-size-sm" href="#"
+onclick="criarPagamento(30)">
 						<span class="elementor-button-content-wrapper">
 									<span class="elementor-button-text">R$ 500</span>
 					</span>
@@ -505,7 +537,8 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16
 				<div class="elementor-element elementor-element-e8872ef elementor-mobile-align-justify elementor-widget-mobile__width-initial elementor-align-justify elementor-widget__width-initial elementor-widget elementor-widget-button" data-id="e8872ef" data-element_type="widget" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
-					<a class="elementor-button elementor-button-link elementor-size-sm" href="https://www.pagamentos-seguro.link/checkout/c708f423-bd24-4f35-a025-8ce1de90f6bf"onclick="fbq('track', 'InitiateCheckout')">
+					<a class="elementor-button elementor-button-link elementor-size-sm" href="#"
+onclick="criarPagamento(30)">
 						<span class="elementor-button-content-wrapper">
 									<span class="elementor-button-text">R$ 750</span>
 					</span>
@@ -518,7 +551,8 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16
 				<div class="elementor-element elementor-element-408279a elementor-mobile-align-justify elementor-widget-mobile__width-initial elementor-align-justify elementor-widget__width-initial elementor-widget elementor-widget-button" data-id="408279a" data-element_type="widget" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
-					<a class="elementor-button elementor-button-link elementor-size-sm" href="https://www.pagamentos-seguro.link/checkout/c9eb2dec-a563-4b8e-9bb2-46de7f1afb0f"onclick="fbq('track', 'InitiateCheckout')">
+					<a class="elementor-button elementor-button-link elementor-size-sm" href="#"
+onclick="criarPagamento(30)">
 						<span class="elementor-button-content-wrapper">
 									<span class="elementor-button-text">R$ 1.000</span>
 					</span>
